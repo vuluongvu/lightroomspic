@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="./asset/style.css">
+    <meta charset="UTF-8">
+    <title>Light box </title>
+
+</head>
+
+<body>
+
+
+    <div class="gallery">
+        <img src="https://noithatbinhminh.com.vn/wp-content/uploads/2022/08/anh-dep-44.jpg.webp" alt="" data-index="0">
+        <img src="https://i.pinimg.com/736x/d3/ec/57/d3ec57017a22caf18ecd01d67a8f8969.jpg" alt="" data-index="1">
+        <img src="https://images.pexels.com/photos/1172064/pexels-photo-1172064.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+            alt="" data-index="2">
+        <img src="https://i.pinimg.com/736x/d3/ec/57/d3ec57017a22caf18ecd01d67a8f8969.jpg" alt="" data-index="3">
+        <img src="https://vn1.vdrive.vn/alohamedia.vn/2025/02/15-712x1024.jpg" alt="" data-index="3">
+        <img src="https://i.pinimg.com/736x/d3/ec/57/d3ec57017a22caf18ecd01d67a8f8969.jpg" alt="" data-index="3">
+        <img src="https://i.pinimg.com/736x/d3/ec/57/d3ec57017a22caf18ecd01d67a8f8969.jpg" alt="" data-index="3">
+        <img src="https://i.pinimg.com/736x/d3/ec/57/d3ec57017a22caf18ecd01d67a8f8969.jpg" alt="" data-index="3">
+        <img src="https://i.pinimg.com/736x/d3/ec/57/d3ec57017a22caf18ecd01d67a8f8969.jpg" alt="" data-index="3">
+        <img src="https://i.pinimg.com/736x/d3/ec/57/d3ec57017a22caf18ecd01d67a8f8969.jpg" alt="" data-index="3">
+        <img src="https://i.pinimg.com/736x/d3/ec/57/d3ec57017a22caf18ecd01d67a8f8969.jpg" alt="" data-index="3">
+        <img src="https://i.pinimg.com/736x/d3/ec/57/d3ec57017a22caf18ecd01d67a8f8969.jpg" alt="" data-index="3">
+        <img src="https://i.pinimg.com/736x/d3/ec/57/d3ec57017a22caf18ecd01d67a8f8969.jpg" alt="" data-index="3">
+        <img src="https://i.pinimg.com/736x/d3/ec/57/d3ec57017a22caf18ecd01d67a8f8969.jpg" alt="" data-index="3">
+        <img src="https://noithatbinhminh.com.vn/wp-content/uploads/2022/08/anh-dep-44.jpg.webp" alt="" data-index="3">
+        <img src="https://i.pinimg.com/736x/d3/ec/57/d3ec57017a22caf18ecd01d67a8f8969.jpg" alt="" data-index="3">
+        <img src="https://noithatbinhminh.com.vn/wp-content/uploads/2022/08/anh-dep-44.jpg.webp" alt="" data-index="3">
+
+
+    </div>
+
+    <!-- Modal -->
+    <div id="myModal" class="modal">
+        <span class="close">&times;</span>
+        <span class="prev">&#10094;</span>
+        <img class="modal-content" id="modalImg">
+        <span class="next">&#10095;</span>
+    </div>
+
+    <script>
+        const modal = document.getElementById("myModal");
+        const modalImg = document.getElementById("modalImg");
+        const closeBtn = document.querySelector(".close");
+        const nextBtn = document.querySelector(".next");
+        const prevBtn = document.querySelector(".prev");
+        const images = document.querySelectorAll(".gallery img");
+
+        let currentIndex = 0;
+
+        images.forEach((img, index) => {
+            img.addEventListener("click", () => {
+                modal.style.display = "block";
+                modalImg.src = img.src;
+                currentIndex = index;
+            });
+        });
+
+        function showImage(index) {
+            if (index >= images.length) currentIndex = 0;
+            else if (index < 0) currentIndex = images.length - 1;
+            else currentIndex = index;
+
+            modalImg.src = images[currentIndex].src;
+        }
+
+        nextBtn.onclick = () => showImage(currentIndex + 1);
+        prevBtn.onclick = () => showImage(currentIndex - 1);
+        closeBtn.onclick = () => modal.style.display = "none";
+
+        // Tắt modal khi click ngoài ảnh
+        modal.onclick = function (event) {
+            if (event.target === modal) {
+                modal.style.display = "none";
+            }
+        };
+    </script>
+
+</body>
+
+</html>

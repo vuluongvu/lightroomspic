@@ -2,36 +2,140 @@
 <html lang="en">
 
 <head>
-    <link rel="stylesheet" href="./asset/style.css">
     <meta charset="UTF-8">
-    <title>Light box </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lightbox</title>
+    <style>
+        body {
+            background: #ededed;
+            color: white;
+            font-family: sans-serif;
+            text-align: center;
+            padding: 30px;
+        }
 
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .gallery img {
+            width: calc(25% - 10px);
+            /* 4 ảnh mỗi hàng */
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .gallery img:hover {
+            opacity: 0.8;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.9);
+            padding-top: 60px;
+        }
+
+        .modal-content {
+            margin: auto;
+            display: block;
+            max-width: 90%;
+            max-height: 80vh;
+            animation: zoom 0.4s;
+            border-radius: 10px;
+        }
+
+        @keyframes zoom {
+            from {
+                transform: scale(0.7);
+            }
+
+            to {
+                transform: scale(1);
+            }
+        }
+
+        .close {
+            position: absolute;
+            top: 20px;
+            right: 35px;
+            color: #fff;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .prev,
+        .next {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            width: auto;
+            padding: 16px;
+            color: #fff;
+            font-weight: bold;
+            font-size: 30px;
+            transition: 0.3s;
+            user-select: none;
+        }
+
+        .prev {
+            left: 10px;
+        }
+
+        .next {
+            right: 10px;
+        }
+
+        .prev:hover,
+        .next:hover {
+            color: #ccc;
+        }
+
+        /* Responsive mobile */
+        @media screen and (max-width: 768px) {
+            .gallery img {
+                width: calc(50% - 10px);
+                /* 2 ảnh mỗi hàng */
+            }
+
+            .close {
+                top: 10px;
+                right: 15px;
+                font-size: 30px;
+            }
+
+            .modal-content {
+                max-height: 70vh;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-
     <div class="gallery">
+        <!-- Thêm bao nhiêu ảnh cũng được -->
         <img src="https://noithatbinhminh.com.vn/wp-content/uploads/2022/08/anh-dep-44.jpg.webp" alt="" data-index="0">
         <img src="https://i.pinimg.com/736x/d3/ec/57/d3ec57017a22caf18ecd01d67a8f8969.jpg" alt="" data-index="1">
         <img src="https://images.pexels.com/photos/1172064/pexels-photo-1172064.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
             alt="" data-index="2">
-        <img src="https://i.pinimg.com/736x/d3/ec/57/d3ec57017a22caf18ecd01d67a8f8969.jpg" alt="" data-index="3">
         <img src="https://vn1.vdrive.vn/alohamedia.vn/2025/02/15-712x1024.jpg" alt="" data-index="3">
-        <img src="https://i.pinimg.com/736x/d3/ec/57/d3ec57017a22caf18ecd01d67a8f8969.jpg" alt="" data-index="3">
-        <img src="https://i.pinimg.com/736x/d3/ec/57/d3ec57017a22caf18ecd01d67a8f8969.jpg" alt="" data-index="3">
-        <img src="https://i.pinimg.com/736x/d3/ec/57/d3ec57017a22caf18ecd01d67a8f8969.jpg" alt="" data-index="3">
-        <img src="https://i.pinimg.com/736x/d3/ec/57/d3ec57017a22caf18ecd01d67a8f8969.jpg" alt="" data-index="3">
-        <img src="https://i.pinimg.com/736x/d3/ec/57/d3ec57017a22caf18ecd01d67a8f8969.jpg" alt="" data-index="3">
-        <img src="https://i.pinimg.com/736x/d3/ec/57/d3ec57017a22caf18ecd01d67a8f8969.jpg" alt="" data-index="3">
-        <img src="https://i.pinimg.com/736x/d3/ec/57/d3ec57017a22caf18ecd01d67a8f8969.jpg" alt="" data-index="3">
-        <img src="https://i.pinimg.com/736x/d3/ec/57/d3ec57017a22caf18ecd01d67a8f8969.jpg" alt="" data-index="3">
-        <img src="https://i.pinimg.com/736x/d3/ec/57/d3ec57017a22caf18ecd01d67a8f8969.jpg" alt="" data-index="3">
-        <img src="https://noithatbinhminh.com.vn/wp-content/uploads/2022/08/anh-dep-44.jpg.webp" alt="" data-index="3">
-        <img src="https://i.pinimg.com/736x/d3/ec/57/d3ec57017a22caf18ecd01d67a8f8969.jpg" alt="" data-index="3">
-        <img src="https://noithatbinhminh.com.vn/wp-content/uploads/2022/08/anh-dep-44.jpg.webp" alt="" data-index="3">
-
-
+        <img src="https://i.pinimg.com/736x/d3/ec/57/d3ec57017a22caf18ecd01d67a8f8969.jpg" alt="" data-index="4">
+        <img src="https://noithatbinhminh.com.vn/wp-content/uploads/2022/08/anh-dep-44.jpg.webp" alt="" data-index="5">
+        <img src="https://i.pinimg.com/736x/d3/ec/57/d3ec57017a22caf18ecd01d67a8f8969.jpg" alt="" data-index="6">
+        <img src="https://i.pinimg.com/736x/d3/ec/57/d3ec57017a22caf18ecd01d67a8f8969.jpg" alt="" data-index="7">
     </div>
 
     <!-- Modal -->
@@ -64,7 +168,6 @@
             if (index >= images.length) currentIndex = 0;
             else if (index < 0) currentIndex = images.length - 1;
             else currentIndex = index;
-
             modalImg.src = images[currentIndex].src;
         }
 
@@ -72,7 +175,6 @@
         prevBtn.onclick = () => showImage(currentIndex - 1);
         closeBtn.onclick = () => modal.style.display = "none";
 
-        // Tắt modal khi click ngoài ảnh
         modal.onclick = function (event) {
             if (event.target === modal) {
                 modal.style.display = "none";
